@@ -25,7 +25,7 @@ function FieldForm() {
   });
   const [analytics, setAnalytics] = useState(null);
   const [editingItem, setEditingItem] = useState(null);
-  const { user, token, role } = useSelector((state) => state.user);
+  const { token, role } = useSelector((state) => state.user);
   const { userFields, otherFields } = useSelector((state) => state.field)
   const [loading, setLoading] = useState(false)
 

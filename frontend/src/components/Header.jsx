@@ -5,7 +5,8 @@ export default function Header({ toggleSidebar }) {
     const { email } = useSelector((state) => state.user);
     const role = localStorage.getItem('role')
     return (
-        <div className="sticky bg-[#D9D9D9] top-0 z-[3] flex items-center justify-between [box-shadow:0px_4px_4px_0px_#00000040_inset] w-full shadow-md">
+        <>
+        {email && <div className="sticky bg-[#D9D9D9] top-0 z-[3] flex items-center justify-between [box-shadow:0px_4px_4px_0px_#00000040_inset] w-full shadow-md">
             <img src='https://res.cloudinary.com/dhhxki61s/image/upload/v1736436140/header_ezvaag.jpg' alt='header' className='filter brightness-[50%] h-[10vh] w-full object-cover'></img>
             <div className="absolute left-[2vw] flex items-center gap-2 text-2xl font-semibold text-[#282828] w-[80%] uppercase">
                 <div className="lg:hidden rounded flex items-center justify-center text-white">
@@ -18,6 +19,7 @@ export default function Header({ toggleSidebar }) {
                 src={`https://api.dicebear.com/5.x/initials/svg?seed=${email[0] + email[1]}`}
                 alt="Profile Picture"
             />
-        </div>
+        </div>}
+        </>
     )
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { IoMdClose } from "react-icons/io";
 import { FiLogOut } from "react-icons/fi";
 import { MdPayments } from "react-icons/md";
@@ -13,7 +13,8 @@ import Header from "../components/Header";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { name, token } = useSelector((state) => state.user);
+  const token = localStorage.getItem('token')
+  const user = localStorage.getItem('user')
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const Dashboard = () => {
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   useEffect(() => {
-    if (!token || !name) {
+    if (!token || !user) {
       const sessionExpired = async () => {
         dispatch(logout());
         toast.error('Session Expired');
@@ -31,7 +32,7 @@ const Dashboard = () => {
       };
       sessionExpired();
     }
-  }, [token, name, navigate, dispatch]);
+  }, [token, user, navigate, dispatch]);
 
   const handleLogout = async () => {
     try {
@@ -61,7 +62,8 @@ const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <>
+    {token && <div className="flex h-screen overflow-hidden">
       <div 
         className={`fixed inset-y-0 left-0 bg-[#716262] shadow-lg w-64 transform z-10 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           } transition-transform duration-300 md:relative md:translate-x-0`}
@@ -133,7 +135,8 @@ const Dashboard = () => {
           </div>
         </Modal>
       )}
-    </div>
+    </div>}
+    </>
   );
 };
 

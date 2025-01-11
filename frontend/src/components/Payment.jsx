@@ -8,8 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 const Payment = () => {
 
   const dispatch = useDispatch()
-  const { pro } = useSelector((state) => state.user)
-  const token = localStorage.getItem('token')
+  const { pro, token } = useSelector((state) => state.user)
 
   const verifyPayment = (data) => {
 		const options = {
@@ -54,6 +53,14 @@ const Payment = () => {
       toast.error("Failed to initiate payment!");
 		}
 	};
+
+  if (!token) {
+    return (
+      <div className="flex items-center justify-center h-screen border">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto relative">

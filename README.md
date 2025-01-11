@@ -60,7 +60,7 @@ For the client, if required, create a .env file in the client directory:
 
 env
 Copy code
-VITE_REACT_APP_BASE_URL = 'http://localhost:3003/api'
+VITE_REACT_APP_BASE_URL = 'https://sensegrass-backend-beta.vercel.app/api'
 Step 2: Start the Backend
 Navigate to the server directory and start the backend:
 
